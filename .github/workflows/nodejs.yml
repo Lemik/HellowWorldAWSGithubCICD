@@ -22,6 +22,11 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         source: "./"  # This now correctly points to the current directory
         target: "/var/www/HellowWorldAWSGithubCICD"
+        port: 22
+        timeout: '30s'
+        command_timeout: '10m'
+        rm: false
+        debug: true
 
         
     - name: Restart PM2 application
