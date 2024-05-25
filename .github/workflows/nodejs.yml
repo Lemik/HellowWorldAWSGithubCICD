@@ -13,7 +13,15 @@ jobs:
     
     - name: Install dependencies
       run: npm install
- 
+      
+    - name: Check if secrets are loaded
+      run: |
+        if [ -z "${{ secrets.REMOTE_HOST }}" ] || [ -z "${{ secrets.REMOTE_USER }}" ] || [ -z "${{ secrets.SSH_PRIVATE_KEY }}" ]; then
+          echo "One or more secrets are not set."
+        else
+          echo "All necessary secrets are set."
+        fi
+      
     - name: Deploy to AWS EC2
       uses: appleboy/scp-action@v0.1.7
       with:
